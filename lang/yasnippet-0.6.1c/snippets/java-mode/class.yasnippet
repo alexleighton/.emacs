@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: class
+# key: class
+# expand-env: ((file-name (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))) (yas/indent-line 'fixed))
+# --
+public class ${1:`file-name`} {
+
+    public ${2:`file-name`}($3) {
+        $0
+    }
+}
