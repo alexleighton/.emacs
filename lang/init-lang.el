@@ -116,6 +116,11 @@
   (interactive "sSearch the JDK for: ")
   (google-it (concat search-string " \"Java Platform SE 6\"")))
 
+(defun jdk-search-at-point ()
+  "Does a google search for the thing-at-point."
+  (interactive)
+  (jdk-search (thing-at-point 'word)))
+
 (defun semicolon-to-eol ()
   "If we're on a line that shouldn't have a `;' on it, send the
  `;' to the end of the line."
@@ -130,6 +135,7 @@
 (add-hook 'java-mode-hook
           '(lambda ()
              (local-set-key "\C-cs" 'jdk-search)
+             (local-set-key "\C-c\C-s" 'jdk-search-at-point)
              (local-set-key ";" 'semicolon-to-eol)
              (yas/minor-mode-on)))
 
