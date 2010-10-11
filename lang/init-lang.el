@@ -137,6 +137,7 @@
              (local-set-key "\C-cs" 'jdk-search)
              (local-set-key "\C-c\C-s" 'jdk-search-at-point)
              (local-set-key ";" 'semicolon-to-eol)
+             (subword-mode) ; Allows C-left/C-right to navigate StudlyCaps
              (yas/minor-mode-on)))
 
 ;;===============================================================
