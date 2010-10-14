@@ -8,12 +8,13 @@
 ;;===============================================================
 ;; 1. General Programming
 ;; 2. Copy-Pasting
-;; 3. Individual Languages
-;;    3a. Haskell
-;;    3b. OCaml
-;;    3c. PHP
-;;    3d. Java
+;; 3. Flymake
 ;; 4. Yasnippet
+;; 5. Individual Languages
+;;    5a. Haskell
+;;    5b. OCaml
+;;    5c. PHP
+;;    5d. Java
 
 
 ;;===============================================================
@@ -80,10 +81,34 @@
 
 
 ;;===============================================================
-;; 3. Individual Languages
+;; 4. Yasnippet
+
+(add-to-list 'load-path (concat home-directory "/lang/yasnippet-0.6.1c"))
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory (concat home-directory "/lang/yasnippet-0.6.1c/snippets"))
+
+;;(yas/global-mode)
+
+;; Sets hippie-expand to use yas/hippie-try-expand first.
+(setq hippie-expand-try-functions-list
+      (cons 'yas/hippie-try-expand hippie-expand-try-functions-list))
+
+;;(global-set-key [(control tab)] 'yas/expand)
+
+
+;;===============================================================
+;; 5. Flymake
+
+(require 'flymake)
+
+
+
+;;===============================================================
+;; 5. Individual Languages
 
 ;;---------------------------------------------------------------
-;; 3a. Haskell
+;; 5a. Haskell
 
 ;; (load (concat home-directory
 ;;               "/lang/haskell-mode-2.8.0/haskell-site-file.el"))
@@ -93,7 +118,7 @@
 
 
 ;;---------------------------------------------------------------
-;; 3b. OCaml
+;; 5b. OCaml
 
 (add-to-list 'load-path (concat home-directory "/lang/tuareg"))
 
@@ -103,13 +128,13 @@
 
 
 ;;---------------------------------------------------------------
-;; 3c. PHP
+;; 5c. PHP
 
-(require 'php-mode)
+;; (require 'php-mode)
 
 
 ;;---------------------------------------------------------------
-;; 3d. Java
+;; 5d. Java
 
 (defun jdk-search (search-string)
   "Does a google search for the given search string."
@@ -138,23 +163,9 @@
              (local-set-key "\C-c\C-s" 'jdk-search-at-point)
              (local-set-key ";" 'semicolon-to-eol)
              (subword-mode) ; Allows C-left/C-right to navigate StudlyCaps
+             (flymake-mode-on)
              (yas/minor-mode-on)))
 
-;;===============================================================
-;; 4. Yasnippet
-
-(add-to-list 'load-path (concat home-directory "/lang/yasnippet-0.6.1c"))
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory (concat home-directory "/lang/yasnippet-0.6.1c/snippets"))
-
-;;(yas/global-mode)
-
-;; Sets hippie-expand to use yas/hippie-try-expand first.
-(setq hippie-expand-try-functions-list
-      (cons 'yas/hippie-try-expand hippie-expand-try-functions-list))
-
-;;(global-set-key [(control tab)] 'yas/expand)
 
 ;;===============================================================
 
