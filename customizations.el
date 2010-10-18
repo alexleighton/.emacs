@@ -195,6 +195,9 @@
 ;; Week starts monday
 (setq calendar-week-start-day 1)
 
+;; Fix Mac delete key
+(normal-erase-is-backspace-mode 1)
+
 ;;===============================================================
 
 (provide 'customizations)
