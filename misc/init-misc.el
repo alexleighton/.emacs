@@ -15,11 +15,24 @@
 
 
 ;;===============================================================
-;; 1. Smart-tab
+;; 1. Smart-tab / Hippie-expand
 
 (autoload 'smart-tab "smart-tab" "Smart tab completion/indentation." t)
 (global-set-key [(tab)] 'smart-tab)
 (setq smart-tab-using-hippie-expand t)
+
+(setq hippie-expand-try-functions-list
+      (list
+       'try-complete-file-name-partially
+       'try-complete-file-name
+       'try-expand-dabbrev
+       'try-expand-dabbrev-all-buffers
+       'try-expand-dabbrev-from-kill
+       'try-expand-all-abbrevs
+       'try-expand-line
+       'try-expand-list
+       'try-complete-lisp-symbol-partially
+       'try-complete-lisp-symbol))
 
 
 
