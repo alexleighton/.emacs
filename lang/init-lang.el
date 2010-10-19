@@ -9,23 +9,12 @@
 ;; 1. Copy-Pasting
 ;; 2. Yasnippet
 ;; 3. Flymake
-<<<<<<< HEAD
 ;; 4. Individual Languages
 ;;    4a. Haskell
 ;;    4b. OCaml
 ;;    4c. PHP
 ;;    4d. Java
 ;; 5. General Programming
-=======
-;; 4. Yasnippet
-;; 5. Individual Languages
-;;    5a. Haskell
-;;    5b. OCaml
-;;    5c. PHP
-;;    5d. Java
-;;    5e. Python
->>>>>>> 128e6edb16c7566a0466484c8e56d00f6c01603f
-
 
 
 ;;===============================================================
@@ -70,7 +59,6 @@
 ;; 3. Flymake
 
 (require 'flymake)
-
 
 
 ;;===============================================================
@@ -136,7 +124,12 @@
              (yas/minor-mode-on)))
 
 
-<<<<<<< HEAD
+;;---------------------------------------------------------------
+;; 5e. Python
+
+(add-hook 'python-mode-hook '(lambda () (subword-mode)))
+
+
 
 ;;===============================================================
 ;; 5. General Programming
@@ -180,13 +173,6 @@
 
 (setq compilation-ask-about-save nil)
 
-
-=======
-;;---------------------------------------------------------------
-;; 5e. Python
-
-(add-hook 'python-mode-hook '(lambda () (subword-mode)))
->>>>>>> 128e6edb16c7566a0466484c8e56d00f6c01603f
 
 ;;===============================================================
 
