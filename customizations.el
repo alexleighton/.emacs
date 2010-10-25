@@ -10,7 +10,6 @@
 ;; 1. Miscellaneous Key Bindings
 ;;    1a. Macros
 ;;    1b. Movement
-;;    1c. Programming keys
 ;; 2. File Handling
 ;; 3. Miscellaneous
 
@@ -81,21 +80,6 @@
 
 ;; Set [Ctrl] - [z] to undo.
 (global-set-key "\C-z" 'undo)
-
-
-;;---------------------------------------------------------------
-;; 1c. Programming keys
-
-;; Compile - 'my-compile gotten from 'window-modes
-(global-set-key [(f6)] 'my-compile)
-;; Recompile
-(global-set-key [(shift f6)] 'recompile)
-;; Display the next compiler error message
-(global-set-key [(f7)] 'next-error)
-;; Display the previous compiler error message
-(global-set-key [(shift f7)] 'previous-error)
-;; Display the first compiler error message
-(global-set-key [(control f7)] 'first-error)
 
 
 

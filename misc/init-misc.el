@@ -56,15 +56,18 @@
 ;; 4. Multi-term
 
 (autoload 'multi-term-next "multi-term" "Multiple terms" t)
+(autoload 'multi-term "multi-term" "Multiple terms" t)
 
 (setq multi-term-program "/bin/bash")
 (add-hook 'term-mode-hook
           '(lambda ()
              (setq autopair-dont-activate t)
-             (term-line-mode)))
+             (message "Hey yo!")
+             (term-line-mode)
+             ))
 
 (global-set-key (kbd "C-c t") 'multi-term-next)
-
+(global-set-key (kbd "C-c T") 'multi-term)
 
 
 ;;===============================================================

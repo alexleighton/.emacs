@@ -15,6 +15,7 @@
 ;;    4c. PHP
 ;;    4d. Java
 ;; 5. General Programming
+;; 6. Compilation
 
 
 ;;===============================================================
@@ -125,7 +126,7 @@
 
 
 ;;---------------------------------------------------------------
-;; 5e. Python
+;; 4e. Python
 
 (add-hook 'python-mode-hook '(lambda () (subword-mode)))
 
@@ -172,6 +173,55 @@
 (setq compilation-scroll-output t)
 
 (setq compilation-ask-about-save nil)
+
+
+;;===============================================================
+;; 6. Compilation
+
+;; Remove the compilation window on success
+;; But only when not in two-windows mode.
+;; If in two-windows mode, prompt to kill the buffer.
+(setq compilation-finish-function
+      (lambda (buf str)
+        (if two-windows-on nil
+          (if (string-match "exited abnormally" str)
+              (message "Compilation erros, press C-x ` to visit")
+            (run-at-time 0.5 nil 'delete-windows-on buf)
+            (message "No Compilation Errors!")))))
+
+(defun my-compile ()
+  "Run compile and resize the compile window"
+  (interactive)
+  (if two-windows-on (call-interactively 'compile)
+    (progn
+      (call-interactively 'compile)
+      (setq cur (selected-window))
+      (setq w (get-buffer-window "*compilation*"))
+      (select-window w)
+      (setq h (window-height w))
+      (shrink-window (- h 15))
+      (select-window cur))))
+
+(defun my-compilation-hook ()
+  "Make sure that the compile window is splitting vertically"
+  (if two-windows-on nil
+    (progn
+      (if (not (get-buffer-window "*compilation*"))
+          (progn (split-window-vertically))))))
+
+(add-hook 'compilation-mode-hook 'my-compilation-hook)
+
+;; Compile - 'my-compile gotten from 'window-modes
+(global-set-key [(f6)] 'my-compile)
+;; Recompile
+(global-set-key [(shift f6)] 'recompile)
+;; Display the next compiler error message
+(global-set-key [(f7)] 'next-error)
+;; Display the previous compiler error message
+(global-set-key [(shift f7)] 'previous-error)
+;; Display the first compiler error message
+(global-set-key [(control f7)] 'first-error)
+
 
 
 ;;===============================================================

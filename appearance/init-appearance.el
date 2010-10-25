@@ -103,13 +103,7 @@
 
 ;;===============================================================
 ;; 3. Window Modes
-
-(autoload 'two-windows-mode-off "window-modes"
-  "Turning two-windows-mode off." t)
-(autoload 'two-windows-mode-on "window-modes"
-  "Turning two-windows-mode on." t)
-(autoload 'my-compile "window-modes"
-  "My compilation function." t)
+(require 'window-modes)
 
 (global-set-key (kbd "C-x C-1") 'two-windows-mode-off)
 (global-set-key (kbd "C-x C-2") 'two-windows-mode-on)
