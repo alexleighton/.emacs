@@ -14,6 +14,8 @@
 ;;    4b. OCaml
 ;;    4c. PHP
 ;;    4d. Java
+;;    4e. Python
+;;    4f. HTML
 ;; 5. General Programming
 ;; 6. Compilation
 
@@ -130,6 +132,12 @@
 
 (add-hook 'python-mode-hook '(lambda () (subword-mode)))
 
+
+;;---------------------------------------------------------------
+;; 4f. HTML
+
+(add-hook 'html-mode-hook '(lambda ()
+                             (local-set-key "\C-co" 'browse-url-of-buffer)))
 
 
 ;;===============================================================
