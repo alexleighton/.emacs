@@ -12,6 +12,7 @@
 ;; 4. Multi-term
 ;; 5. Autopair
 ;; 6. Insert-time
+;; 7. Flyspell Mode
 
 
 ;;===============================================================
@@ -99,6 +100,14 @@
 (setq insert-date-format "%A %m/%d/%Y")
 (setq insert-time-format "%I:%M %p")
 
+
+;;===============================================================
+;; 8. Flyspell Mode
+
+(global-set-key [(f2)] 'flyspell-mode)
+(global-set-key [(shift f2)] 'flyspell-buffer)
+(global-set-key [(f3)] 'flyspell-goto-next-error)
+(global-set-key [(shift f3)] 'flyspell-correct-word-before-point)
 
 ;;===============================================================
 
