@@ -54,20 +54,54 @@
                 'my-previous-window)
 (global-set-key [(control x) (control right)] 'my-next-window)
 
-(defun my-move-line-up () "Swaps the current line with the one above it."
-  (interactive)
-  (let ((col (current-column)))
-    (save-excursion (next-line) (transpose-lines -1))
-    (move-to-column col)))
-(defun my-move-line-down () "Swaps the current line with the one below it."
-  (interactive)
-  (let ((col (current-column)))
-    (save-excursion (next-line) (transpose-lines 1))
-    (next-line)
-    (move-to-column col)))
+(defun my-move-text-internal (arg)
+  "Internal text move function."
+  (cond
+   ((and mark-active transient-mark-mode)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (let ((column (current-column))
+          (text (delete-and-extract-region (point) (mark))))
+      (forward-line arg)
+      (move-to-column column t)
+      (set-mark (point))
+      (insert text)
+      (exchange-point-and-mark)
+      (setq deactivate-mark nil)))
+   (t
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg))
+        (forward-line -1))
+      (move-to-column column t)))))
 
-(global-set-key [(control shift up)] 'my-move-line-up)
-(global-set-key [(control shift down)] 'my-move-line-down)
+(defun my-move-text-down (arg)
+  "Move region (transient-mark-mode active) or current line arg lines down."
+  (interactive "*p")
+  (my-move-text-internal arg))
+
+(defun my-move-text-up (arg)
+  "Move region (transient-mark-mode active) or current lines arg lines up."
+  (interactive "*p")
+  (my-move-text-internal (- arg)))
+
+;; (defun my-move-line-up () "Swaps the current line with the one above it."
+;;   (interactive)
+;;   (let ((col (current-column)))
+;;     (save-excursion (next-line) (transpose-lines -1))
+;;     (move-to-column col)))
+;; (defun my-move-line-down () "Swaps the current line with the one below it."
+;;   (interactive)
+;;   (let ((col (current-column)))
+;;     (save-excursion (next-line) (transpose-lines 1))
+;;     (next-line)
+;;     (move-to-column col)))
+
+(global-set-key [(control shift up)] 'my-move-text-up)
+(global-set-key [(control shift down)] 'my-move-text-down)
 
 ;; rebind C-x C-b to better buffer list.
 (global-set-key [(control x) (control b)] 'electric-buffer-list)
@@ -81,6 +115,8 @@
 ;; Set [Ctrl] - [z] to undo.
 (global-set-key "\C-z" 'undo)
 
+(global-set-key [(control meta left)] 'beginning-of-line)
+(global-set-key [(control meta right)] 'end-of-line)
 
 
 ;;===============================================================

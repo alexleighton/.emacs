@@ -49,11 +49,15 @@
 
 ;; Highlight trailing whitespace in all modes
 (setq-default show-trailing-whitespace t)
+
 ;; Remove highlight of trailing whitespace in the
 ;; following modes:
-(add-hook 'term-mode-hook '(lambda () (setq show-trailing-whitespace nil)))
-(add-hook 'calendar-mode-hook
-          '(lambda () (setq show-trailing-whitespace nil)))
+(dolist (mode-hook '(term-mode-hook
+                     calendar-mode-hook
+                     compilation-mode-hook
+                     python-mode-hook))
+  (add-hook mode-hook
+            '(lambda () (setq show-trailing-whitespace nil))))
 
 ;; Show both column and line.
 (setq column-number-mode t)
