@@ -130,7 +130,9 @@
 ;;---------------------------------------------------------------
 ;; 4e. Python
 
-(add-hook 'python-mode-hook '(lambda () (subword-mode)))
+(add-hook 'python-mode-hook
+          '(lambda ()
+             (subword-mode)))
 
 
 ;;---------------------------------------------------------------
