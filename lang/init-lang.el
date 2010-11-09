@@ -173,7 +173,8 @@
                            hippie-expand-try-functions-list))
 
                (local-set-key [return] 'newline-and-indent)
-               (linum-mode 1))))
+               (linum-mode 1)
+               )))
 
 (setq compile-command "make") ; Stop using make -k
 
