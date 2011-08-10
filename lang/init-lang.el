@@ -132,6 +132,8 @@
 
 (add-hook 'python-mode-hook
           '(lambda ()
+             (setq-default tab-width 3)
+             (setq indent-tabs-mode nil)
              (subword-mode)))
 
 
@@ -141,6 +143,11 @@
 (add-hook 'html-mode-hook '(lambda ()
                              (local-set-key "\C-co" 'browse-url-of-buffer)))
 
+
+;;---------------------------------------------------------------
+;; 4g. C++
+
+(add-hook 'c++-mode '(lambda () (setq-default c-basic-offset 3)))
 
 ;;===============================================================
 ;; 5. General Programming
