@@ -12,7 +12,7 @@
 ;;===============================================================
 ;; Load Paths
 
-(defvar home-directory "~/emacs"
+(defvar home-directory "~/git/.emacs"
   "Home directory in string form.")
 
 (add-to-list 'load-path home-directory)
