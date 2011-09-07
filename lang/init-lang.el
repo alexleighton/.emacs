@@ -16,6 +16,9 @@
 ;;    4d. Java
 ;;    4e. Python
 ;;    4f. HTML
+;;    4g. C++
+;;    4h. Ruby
+;;    4i. Protobuf
 ;; 5. General Programming
 ;; 6. Compilation
 
@@ -145,9 +148,34 @@
 
 
 ;;---------------------------------------------------------------
-;; 4g. C++
+;; 4g. C++ / C
 
 (add-hook 'c++-mode '(lambda () (setq-default c-basic-offset 3)))
+
+(add-hook 'c-mode '(lambda ()
+                     (setq tab-width 4)
+                     (setq c-indent-level 4)
+                     (setq c-continued-statement-offset 4)
+                     (setq c-brace-offset -4)
+                     (setq c-argdecl-indent 0)
+                     (setq c-label-offset -4)
+                     ;;(setq-default c-basic-offset 4)
+                     (define-key c-mode-map "\C-ce" 'c-comment-edit)
+                     ))
+
+
+;;---------------------------------------------------------------
+;; 4h. Ruby
+
+(add-hook 'ruby-mode-hook '(lambda ()))
+
+
+;;---------------------------------------------------------------
+;; 4i. Protobuf
+
+(require 'protobuf-mode)
+(setq auto-mode-alist
+      (cons '("\\.proto$" . protobuf-mode) auto-mode-alist))
 
 ;;===============================================================
 ;; 5. General Programming
@@ -157,7 +185,7 @@
     c-mode c++-mode objc-mode java-mode
     tuareg-mode haskell-mode ocaml-mode
     latex-mode plain-tex-mode
-    python-mode
+    python-mode ruby-mode
     html-mode css-mode php-mode)
   "General settings get applied to all modes in this list.")
 
@@ -167,7 +195,7 @@
     c-mode-hook c++-mode-hook objc-mode-hook java-mode-hook
     tuareg-mode-hook haskell-mode-hook ocaml-mode-hook
     latex-mode-hook plain-tex-mode-hook
-    python-mode-hook
+    python-mode-hook ruby-mode-hook
     html-mode-hook css-mode-hook php-mode-hook)
   "Mode hooks for modes receiving general settings.")
 
