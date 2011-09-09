@@ -184,7 +184,7 @@
   '(emacs-lisp-mode lisp-mode lisp-interaction-mode scheme-mode
     c-mode c++-mode objc-mode java-mode
     tuareg-mode haskell-mode ocaml-mode
-    latex-mode plain-tex-mode
+    latex-mode plain-tex-mode protobuf-mode
     python-mode ruby-mode
     html-mode css-mode php-mode)
   "General settings get applied to all modes in this list.")
@@ -194,7 +194,7 @@
     lisp-interaction-mode-hook scheme-mode-hook
     c-mode-hook c++-mode-hook objc-mode-hook java-mode-hook
     tuareg-mode-hook haskell-mode-hook ocaml-mode-hook
-    latex-mode-hook plain-tex-mode-hook
+    latex-mode-hook plain-tex-mode-hook protobuf-mode-hook
     python-mode-hook ruby-mode-hook
     html-mode-hook css-mode-hook php-mode-hook)
   "Mode hooks for modes receiving general settings.")
