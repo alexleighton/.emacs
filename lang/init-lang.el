@@ -135,7 +135,7 @@
 
 (defun py-search (search-string)
   "Does a google search for the given search string."
-  (interactive "sSearch the JDK for: ")
+  (interactive "sSearch the Python Docs for: ")
   (google-it (concat search-string " site:docs.python.org")))
 
 (defun py-search-at-point ()
