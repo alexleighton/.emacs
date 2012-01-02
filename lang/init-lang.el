@@ -133,10 +133,22 @@
 ;;---------------------------------------------------------------
 ;; 4e. Python
 
+(defun py-search (search-string)
+  "Does a google search for the given search string."
+  (interactive "sSearch the JDK for: ")
+  (google-it (concat search-string " site:docs.python.org")))
+
+(defun py-search-at-point ()
+  "Does a google search for the thing-at-point."
+  (interactive)
+  (py-search (thing-at-point 'word)))
+
 (add-hook 'python-mode-hook
           '(lambda ()
              (setq-default tab-width 3)
              (setq indent-tabs-mode nil)
+             (local-set-key "\C-cs" 'py-search)
+             (local-set-key "\C-c\C-s" 'py-search-at-point)
              (subword-mode)))
 
 
@@ -152,14 +164,9 @@
 
 (add-hook 'c++-mode '(lambda () (setq-default c-basic-offset 3)))
 
+(setq-default c-basic-offset 4)
 (add-hook 'c-mode '(lambda ()
-                     (setq tab-width 4)
-                     (setq c-indent-level 4)
-                     (setq c-continued-statement-offset 4)
-                     (setq c-brace-offset -4)
-                     (setq c-argdecl-indent 0)
-                     (setq c-label-offset -4)
-                     ;;(setq-default c-basic-offset 4)
+                     ;; (setq-default c-basic-offset 4)
                      (define-key c-mode-map "\C-ce" 'c-comment-edit)
                      ))
 

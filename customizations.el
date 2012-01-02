@@ -152,7 +152,7 @@
 
 
 ;; See what commands are being used, immediately.
-(setq echo-keystrokes 0.01)
+(setq echo-keystrokes 0.001)
 
 ;; Always exit searches at the beginning of the expression found
 (add-hook 'isearch-mode-end-hook 'custom-goto-match-beginning)

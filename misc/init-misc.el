@@ -102,7 +102,7 @@
 
 
 ;;===============================================================
-;; 8. Flyspell Mode
+;; 7. Flyspell Mode
 
 (global-set-key [(f2)] 'flyspell-mode)
 (global-set-key [(shift f2)] 'flyspell-buffer)
