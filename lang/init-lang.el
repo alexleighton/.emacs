@@ -135,7 +135,8 @@
 
 (add-hook 'python-mode-hook
           '(lambda ()
-             (setq-default tab-width 3)
+             (setq-default py-indent-offset 3)
+             ;(setq-default tab-width 3)
              (setq indent-tabs-mode nil)
              (subword-mode)))
 

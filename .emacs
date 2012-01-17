@@ -46,6 +46,7 @@
   ;; If there is more than one, they won't work right.
  '(auto-compile-include (quote (".emacs" "init-.*.el" "customizatons.el")))
  '(auto-compile-when t)
+ '(comment-padding "  ")
  '(dabbrev-case-fold-search nil))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
