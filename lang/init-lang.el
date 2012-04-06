@@ -163,11 +163,24 @@
 ;;---------------------------------------------------------------
 ;; 4g. C++ / C
 
-(add-hook 'c++-mode '(lambda () (setq-default c-basic-offset 3)))
+;; (add-hook 'c++-mode '(lambda () (setq-default c-basic-offset 3)))
 
-(setq-default c-basic-offset 4)
+(c-add-style "otsys"
+             '("K&R"
+               (c-basic-offset . 3)
+               (c-offsets-alist . ((innamespace . 0)
+                                   (inline-open . 0)))))
+
+(setq c-default-style "otsys")
+
 (add-hook 'c-mode '(lambda ()
-                     ;; (setq-default c-basic-offset 4)
+                     ;;  (setq tab-width 4)
+                     ;;  (setq c-indent-level 4)
+                     ;;  (setq c-continued-statement-offset 4)
+                     ;;  (setq c-brace-offset -4)
+                     ;;  (setq c-argdecl-indent 0)
+                     ;;  (setq c-label-offset -4)
+                     ;;  (setq-default c-basic-offset 4)
                      (define-key c-mode-map "\C-ce" 'c-comment-edit)
                      ))
 
