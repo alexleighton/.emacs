@@ -7,20 +7,19 @@
 ;;
 ;;===============================================================
 ;; 1. Copy-Pasting
-;; 2. Yasnippet
-;; 3. Flymake
-;; 4. Individual Languages
-;;    4a. Haskell
-;;    4b. OCaml
-;;    4c. PHP
-;;    4d. Java
-;;    4e. Python
-;;    4f. HTML
-;;    4g. C++
-;;    4h. Ruby
-;;    4i. Protobuf
-;; 5. General Programming
-;; 6. Compilation
+;; 2. Flymake
+;; 3. Individual Languages
+;;    3a. Haskell
+;;    3b. OCaml
+;;    3c. PHP
+;;    3d. Java
+;;    3e. Python
+;;    3f. HTML
+;;    3g. C++
+;;    3h. Ruby
+;;    3i. Protobuf
+;; 4. General Programming
+;; 5. Compilation
 
 
 ;;===============================================================
@@ -50,28 +49,16 @@
 
 
 ;;===============================================================
-;; 2. Yasnippet
-
-(add-to-list 'load-path (concat home-directory "/lang/yasnippet-0.6.1c"))
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory (concat home-directory "/lang/yasnippet-0.6.1c/snippets"))
-
-;;(yas/global-mode)
-;;(global-set-key [(control tab)] 'yas/expand)
-
-
-;;===============================================================
-;; 3. Flymake
+;; 2. Flymake
 
 (require 'flymake)
 
 
 ;;===============================================================
-;; 4. Individual Languages
+;; 3. Individual Languages
 
 ;;---------------------------------------------------------------
-;; 4a. Haskell
+;; 3a. Haskell
 
 (load (concat home-directory
               "/lang/haskell-mode-2.8.0/haskell-site-file.el"))
@@ -81,7 +68,7 @@
 
 
 ;;---------------------------------------------------------------
-;; 4b. OCaml
+;; 3b. OCaml
 
 (add-to-list 'load-path (concat home-directory "/lang/tuareg"))
 
@@ -91,13 +78,13 @@
 
 
 ;;---------------------------------------------------------------
-;; 4c. PHP
+;; 3c. PHP
 
 ;; (require 'php-mode)
 
 
 ;;---------------------------------------------------------------
-;; 4d. Java
+;; 3d. Java
 
 (defun jdk-search (search-string)
   "Does a google search for the given search string."
@@ -131,7 +118,7 @@
 
 
 ;;---------------------------------------------------------------
-;; 4e. Python
+;; 3e. Python
 
 (defun py-search (search-string)
   "Does a google search for the given search string."
@@ -154,14 +141,14 @@
 
 
 ;;---------------------------------------------------------------
-;; 4f. HTML
+;; 3f. HTML
 
 (add-hook 'html-mode-hook '(lambda ()
                              (local-set-key "\C-co" 'browse-url-of-buffer)))
 
 
 ;;---------------------------------------------------------------
-;; 4g. C++ / C
+;; 3g. C++ / C
 
 ;; (add-hook 'c++-mode '(lambda () (setq-default c-basic-offset 3)))
 
@@ -186,20 +173,20 @@
 
 
 ;;---------------------------------------------------------------
-;; 4h. Ruby
+;; 3h. Ruby
 
 (add-hook 'ruby-mode-hook '(lambda ()))
 
 
 ;;---------------------------------------------------------------
-;; 4i. Protobuf
+;; 3i. Protobuf
 
 (require 'protobuf-mode)
 (setq auto-mode-alist
       (cons '("\\.proto$" . protobuf-mode) auto-mode-alist))
 
 ;;===============================================================
-;; 5. General Programming
+;; 4. General Programming
 
 (defvar alex-programming-modes
   '(emacs-lisp-mode lisp-mode lisp-interaction-mode scheme-mode
@@ -243,12 +230,12 @@
 
 
 ;;===============================================================
-;; 6. Compilation
+;; 5. Compilation
 
 ;; Remove the compilation window on success
 ;; But only when not in two-windows mode.
 ;; If in two-windows mode, prompt to kill the buffer.
-(setq compilation-finish-function
+(setq compilation-finish-functions
       (lambda (buf str)
         (if two-windows-on nil
           (if (string-match "exited abnormally" str)
@@ -262,12 +249,12 @@
   (if two-windows-on (call-interactively 'compile)
     (progn
       (call-interactively 'compile)
-      (setq cur (selected-window))
-      (setq w (get-buffer-window "*compilation*"))
-      (select-window w)
-      (setq h (window-height w))
-      (shrink-window (- h 15))
-      (select-window cur))))
+      (let* ((cur (selected-window))
+            (w (get-buffer-window "*compilation*"))
+            (h (window-height w)))
+        (select-window w)
+        (shrink-window (- h 15))
+        (select-window cur)))))
 
 (defun my-compilation-hook ()
   "Make sure that the compile window is splitting vertically"
