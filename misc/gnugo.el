@@ -676,7 +676,7 @@ For all other values of RSEL, do nothing and return nil."
         col
         (mem (aref (gnugo-get :monkey) 1))
         acc node mprop move)
-    (flet ((as-pos (cc) (if (string= "tt" cc)
+    (cl-flet ((as-pos (cc) (if (string= "tt" cc)
                             "PASS"
                           (setq col (aref cc 0))
                           (format "%c%d"
@@ -704,7 +704,7 @@ For all other values of RSEL, do nothing and return nil."
 (defun gnugo-note (property value &optional movep mogrifyp)
   (when mogrifyp
     (let ((sz (gnugo-treeroot :SZ)))
-      (flet ((mog (pos) (if (string= "PASS" pos)
+      (cl-flet ((mog (pos) (if (string= "PASS" pos)
                             "tt"
                           (let* ((col (aref pos 0))
                                  (one (+ ?a (- col (if (< ?H col) 1 0) ?A)))
@@ -735,7 +735,7 @@ For all other values of RSEL, do nothing and return nil."
              (if (or (eq t resign)
                      (and (stringp resign)
                           (string-match "[BW][+][Rr]esign" resign)))
-                 (flet ((ls (color) (mapcar
+                 (cl-flet ((ls (color) (mapcar
                                      (lambda (x)
                                        (cons (list color)
                                              (split-string x)))
@@ -1198,7 +1198,7 @@ to enable full functionality."
       (setcdr now (cons group (cdr now)))
       ;; disabled permanently -- too wrong
       (when nil
-        (flet ((populate (group)
+        (cl-flet ((populate (group)
                          (let ((color (caar group)))
                            (dolist (stone (cdr group))
                              (gnugo-query "play %s %s" color stone)))))
@@ -1418,7 +1418,7 @@ Also, add the `:RE' SGF property to the root node of the game tree."
                    (y-or-n-p "Game still in play. Stop play now? ")))
     (error "Sorry, game still in play"))
   (unless (gnugo-get :game-over)
-    (flet ((pass (userp)
+    (cl-flet ((pass (userp)
                  (message "Playing PASS for %s ..."
                           (gnugo-get (if userp :user-color :gnugo-color)))
                  (sit-for 1)
@@ -1860,7 +1860,7 @@ starting a new one.  See `gnugo-board-mode' documentation for more info."
           ("\C-c\C-p" . gnugo-describe-internal-properties))))
 
 (unless (get 'help :gnugo-gtp-command-spec)
-  (flet ((sget (x) (get x :gnugo-gtp-command-spec))
+  (cl-flet ((sget (x) (get x :gnugo-gtp-command-spec))
          (jam (cmd prop val) (put cmd :gnugo-gtp-command-spec
                                   (plist-put (sget cmd) prop val)))
          (add (cmd prop val) (jam cmd prop (let ((cur (plist-get
@@ -1882,7 +1882,7 @@ starting a new one.  See `gnugo-board-mode' documentation for more info."
         (info "(gnugo)GTP command reference")
         (when sel (setq sel (intern (car sel))))
         (let (buffer-read-only pad cur spec output found)
-          (flet ((note (s) (insert pad "[NOTE: gnugo.el " s ".]\n")))
+          (cl-flet ((note (s) (insert pad "[NOTE: gnugo.el " s ".]\n")))
             (goto-char (point-min))
             (save-excursion
               (while (re-search-forward "^ *[*] \\([a-zA-Z_]+\\)\\(:.*\\)*\n"
@@ -2029,7 +2029,7 @@ starting a new one.  See `gnugo-board-mode' documentation for more info."
         (specs (mapcar (lambda (full)
                          (cons (car full) (cdddr full)))
                        gnugo/sgf-*r4-properties*)))
-    (flet ((sw () (skip-chars-forward " \t\n"))
+    (cl-flet ((sw () (skip-chars-forward " \t\n"))
            (x (end) (let ((beg (point))
                           (endp (case end
                                   (:end (lambda (char) (= ?\] char)))
@@ -2143,7 +2143,7 @@ starting a new one.  See `gnugo-board-mode' documentation for more info."
                        gnugo/sgf-*r4-properties*))
         p name v spec)
     ;; todo: escape special chars for `text' and `simpletext'.
-    (flet ((>>one (v) (insert (format "[%s]" v)))
+    (cl-flet ((>>one (v) (insert (format "[%s]" v)))
            (>>two (v) (insert (format "[%s:%s]" (car v) (cdr v))))
            (>>nl () (cond ((memq name aft-newline-appreciated)
                            (insert "\n"))

@@ -18,6 +18,7 @@
 ;;    3g. C++
 ;;    3h. Ruby
 ;;    3i. Protobuf
+;;    3j. Javascript
 ;; 4. General Programming
 ;; 5. Compilation
 
@@ -154,14 +155,14 @@
 
 (c-add-style "otsys"
              '("K&R"
-               (c-basic-offset . 3)
+               (c-basic-offset . 4)
                (c-offsets-alist . ((innamespace . 0)
                                    (inline-open . 0)))))
 
 (setq c-default-style "otsys")
 
 (add-hook 'c-mode '(lambda ()
-                     ;;  (setq tab-width 4)
+                     (setq tab-width 4)
                      ;;  (setq c-indent-level 4)
                      ;;  (setq c-continued-statement-offset 4)
                      ;;  (setq c-brace-offset -4)
@@ -185,6 +186,16 @@
 (setq auto-mode-alist
       (cons '("\\.proto$" . protobuf-mode) auto-mode-alist))
 
+
+;;---------------------------------------------------------------
+;; 3j. Javascript
+
+(add-to-list 'load-path (concat home-directory "/lang/js2-mode"))
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(autoload 'js2-mode "js2-mode" "Major mode for editing Javascript code" t)
+
+
 ;;===============================================================
 ;; 4. General Programming
 
@@ -194,7 +205,8 @@
     tuareg-mode haskell-mode ocaml-mode
     latex-mode plain-tex-mode protobuf-mode
     python-mode ruby-mode
-    html-mode css-mode php-mode)
+    html-mode css-mode php-mode
+    js2-mode)
   "General settings get applied to all modes in this list.")
 
 (defvar alex-programming-mode-hooks
@@ -204,7 +216,8 @@
     tuareg-mode-hook haskell-mode-hook ocaml-mode-hook
     latex-mode-hook plain-tex-mode-hook protobuf-mode-hook
     python-mode-hook ruby-mode-hook
-    html-mode-hook css-mode-hook php-mode-hook)
+    html-mode-hook css-mode-hook php-mode-hook
+    js2-mode-hook)
   "Mode hooks for modes receiving general settings.")
 
 ;; Initialize general settings
@@ -212,10 +225,10 @@
   (add-hook mode-hook
             '(lambda ()
                ;; Sets hippie-expand to use yas/hippie-try-expand first.
-               (make-local-variable 'hippie-expand-try-functions-list)
-               (setq hippie-expand-try-functions-list
-                     (cons 'yas/hippie-try-expand
-                           hippie-expand-try-functions-list))
+               ;; (make-local-variable 'hippie-expand-try-functions-list)
+               ;; (setq hippie-expand-try-functions-list
+               ;;       (cons 'yas/hippie-try-expand
+               ;;             hippie-expand-try-functions-list))
 
                (local-set-key [return] 'newline-and-indent)
                (linum-mode 1)

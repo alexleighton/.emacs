@@ -16,6 +16,9 @@
 ;;===============================================================
 ;; 1. Miscellaneous
 
+;; Toggle backspace-is-delete for MacOSX
+(if window-system (normal-erase-is-backspace-mode 0))
+
 ;; Set width and height of the window.
 (setq default-frame-alist
       (append (list
@@ -24,7 +27,7 @@
               default-frame-alist))
 
 ;; Use mousewheel if available.
-(mouse-wheel-mode t)
+(if window-system (mouse-wheel-mode t))
 
 ;; Yes blinking cursor
 (blink-cursor-mode 1)
@@ -32,7 +35,7 @@
 ;; Mouse avoids cursor
 (mouse-avoidance-mode 'exile)
 
-(set-scroll-bar-mode 'right)
+(if window-system (set-scroll-bar-mode 'right))
 
 ;; Include buffer name in title bar.
 (setq frame-title-format "%b - emacs@blackcitrus")
@@ -72,7 +75,7 @@
 (setq x-select-enable-clipboard t)
 
 ;; Remove icon-bar
-(tool-bar-mode -1)
+(if window-system (tool-bar-mode -1))
 
 ;; Use show-paren-mode.
 (setq show-paren-delay 0)
