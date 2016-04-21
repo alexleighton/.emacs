@@ -224,12 +224,6 @@
 (dolist (mode-hook alex-programming-mode-hooks)
   (add-hook mode-hook
             '(lambda ()
-               ;; Sets hippie-expand to use yas/hippie-try-expand first.
-               ;; (make-local-variable 'hippie-expand-try-functions-list)
-               ;; (setq hippie-expand-try-functions-list
-               ;;       (cons 'yas/hippie-try-expand
-               ;;             hippie-expand-try-functions-list))
-
                (local-set-key [return] 'newline-and-indent)
                (linum-mode 1)
                )))
